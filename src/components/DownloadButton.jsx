@@ -2,9 +2,9 @@ import { Button } from '@mui/material';
 import React from 'react';
 import ReportService from '../API/ReportService';
 
-const MyButton = ({children, ...props}) => {
+const DownloadButton = ({children, ...props}) => {
     async function getPosts() {
-        ReportService.getReport(props.date, props.setModalVisible)
+        ReportService.getReport(props.date, props.handleClickSuccess, props.setSuccess)
     }
     return (
         <div>
@@ -13,4 +13,4 @@ const MyButton = ({children, ...props}) => {
     );
 };
 
-export default MyButton;
+export default DownloadButton;

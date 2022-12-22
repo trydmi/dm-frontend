@@ -1,10 +1,8 @@
-import ReportDownloader from "./components/ReportDownloader";
+import Navbar from "./components/Navbar";
 
 function App() {
   return (
-    <div className="App">
-      <ReportDownloader/>
-    </div>
+    <Navbar/>
   );
 }
 

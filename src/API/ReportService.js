@@ -1,8 +1,8 @@
 import axios from "axios";
 
 export default class ReportService {
-    static async getReport(date, setModalVisible) {
-        const url = "http://localhost:8085/api/v1/riserva-netta/" + date
+    static async getReport(date, handleClickSuccess, setSuccess) {
+        const url = "http://ec2-52-71-113-72.compute-1.amazonaws.com:8080/api/v1/riserva-netta/" + date
         const method = 'GET'
         await axios({
             url,
@@ -19,9 +19,12 @@ export default class ReportService {
             document.body.appendChild(link);
             link.click();
             link.remove();
+            handleClickSuccess()
+            setSuccess(true)
         }).catch(err => {
             if (err.response.status === 400) {
-                setModalVisible(true)
+                handleClickSuccess()
+                setSuccess(false)
             }
         })
     }
