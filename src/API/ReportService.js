@@ -1,16 +1,13 @@
 import axios from "axios";
 
 export default class ReportService {
-    static async getReport(date, handleClickSuccess, setSuccess) {
+    static getReport(date, handleClickSuccess, setSuccess) {
         const url = "http://ec2-52-71-113-72.compute-1.amazonaws.com:8080/api/v1/riserva-netta/" + date
         const method = 'GET'
-        await axios({
+        axios({
             url,
             method: method,
             responseType: 'blob',
-            headers: {
-                "Access-Control-Allow-Origin": "http://localhost:3000",
-            }
         }).then(response => {
             const downloadUrl = window.URL.createObjectURL(new Blob([response.data]));
             const link = document.createElement('a');

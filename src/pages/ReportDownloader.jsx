@@ -1,7 +1,7 @@
 import { Alert, Box, Snackbar } from '@mui/material';
 import React, { useState } from 'react';
-import Calender from './Calender';
-import DownloadButton from './DownloadButton';
+import Calender from '../components/Calender';
+import DownloadButton from '../components/DownloadButton';
 
 const ReportDownloader = () => {
     const startDate = new Date().toString();
