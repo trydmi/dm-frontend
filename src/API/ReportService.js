@@ -1,8 +1,9 @@
 import axios from "axios";
+import { address } from "./dm-info";
 
 export default class ReportService {
     static getReport(date, handleClickSuccess, setSuccess) {
-        const url = "http://ec2-52-71-113-72.compute-1.amazonaws.com:8080/api/v1/riserva-netta/" + date
+        const url = address + date
         const method = 'GET'
         axios({
             url,
