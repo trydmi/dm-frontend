@@ -1,8 +1,9 @@
+import TableView from '../pages/TableView';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import ExcelRenderer from '../pages/ExcelRenderer/ExcelRenderer';
 import ReportDownloader from '../pages/ReportDownloader';
 import Navbar from './Navbar';
+import Graph from '../pages/Graph';
 
 const Header = () => {
     return (
@@ -11,7 +12,8 @@ const Header = () => {
             <Routes>
                 <Route path="/" element={<ReportDownloader />}/>
                 <Route path="/report" element={<ReportDownloader />}/>
-                <Route path="/view" element={<ExcelRenderer />}/>
+                <Route path="/table" element={<TableView />}/>
+                <Route path="/graph" element={<Graph />}/>
             </Routes>
         </div>
     );

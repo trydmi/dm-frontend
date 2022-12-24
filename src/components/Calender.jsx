@@ -2,13 +2,13 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/system';
 
-const Calender = ({date, setDate}) => {
+const Calender = ({date, setDate, children}) => {
     return (
         <Box textAlign='center'>
             <Stack justifyContent="center" alignItems="center" sx={{ mt: 20 }} component="form" noValidate spacing={3}>
                 <TextField
                     id="date"
-                    label="Report date"
+                    label={children}
                     type="date"
                     sx={{ width: 220 }}
                     InputLabelProps={{
