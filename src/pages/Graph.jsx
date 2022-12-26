@@ -81,11 +81,7 @@ const Graph = () => {
     }
 
     function drawChart() {
-        console.log("before clearing")
-        console.log(chartData)
         chartData.datasets = []
-        console.log("after clearing")
-        console.log(chartData)
         chartData.datasets = [
             {
                 label: "First date Net Reserve",
@@ -104,8 +100,6 @@ const Graph = () => {
                 borderColor: "rgba(229,204,255,1)"
             }
         ]
-        console.log("after adding new data")
-        console.log(chartData)
         setShowCalendar(false)
     }
 
