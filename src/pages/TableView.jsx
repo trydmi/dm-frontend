@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -7,14 +7,16 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ReportService from '../API/ReportService';
-import { Box } from '@mui/system';
+import {Box} from '@mui/system';
 import Calender from '../components/Calender';
-import { Alert, Button, Snackbar, Typography } from '@mui/material';
+import {Alert, Snackbar} from '@mui/material';
 import MyButton from '../components/MyButton';
+import {AxiosError} from "axios";
 
 function createData(title, calories, fat, carbs) {
-    return { title, calories, fat, carbs };
+    return {title, calories, fat, carbs};
 }
+
 let rows = [];
 
 const TableView = () => {
@@ -22,18 +24,21 @@ const TableView = () => {
     const [date, setDate] = useState(startDate)
     const [open, setOpen] = useState(false);
     const [success, setSuccess] = useState();
-    
+    const [data, setData] = useState();
     const [showCalendar, setShowCalendar] = useState(true)
+
     const handleClickSuccess = () => {
         setOpen(true);
     }
+
     const handleClose = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     }
-    function drawTable(data) {
+
+    function drawTable() {
         rows = []
         rows.push(createData("Totale HTC", data['htcTotalePr'], data['htcTotaleNeg'], data['htcTotaleNet']))
         rows.push(createData("Govies DM", data['goviesdmPr'], data['goviesdmNeg'], data['goviesdmNet']))
@@ -54,29 +59,39 @@ const TableView = () => {
         rows.push(createData("Corp/Fin/ABS", data['htcsCorpPr'], data['htcsCorpNeg'], data['htcsCorpNet']))
         setShowCalendar(false)
     }
-    function handleClick() {
-        ReportService.getData(date, handleClickSuccess, setSuccess, drawTable)
+
+    async function handleClick() {
+        const response = await ReportService.getData(date)
+        if (response instanceof AxiosError) {
+            setSuccess(false)
+            handleClickSuccess()
+        } else {
+            setData(response)
+            drawTable()
+        }
     }
+
     function handleClickBack() {
         setOpen(false)
         setShowCalendar(true)
     }
+
     return (
         <div>
             {showCalendar
-                ? 
+                ?
                 <Box textAlign='center'>
                     <Calender date={date} setDate={setDate}>Table date</Calender>
                     <MyButton handleClick={handleClick}>TABLE</MyButton>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{ width: '100%' }}>
+                        <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{width: '100%'}}>
                             {success ? 'Table generated!' : 'No table for the date'}
                         </Alert>
                     </Snackbar>
-                </Box> 
+                </Box>
                 :
                 <TableContainer component={Paper}>
-                    <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
+                    <Table sx={{minWidth: 650}} size="small" aria-label="a dense table">
                         <TableHead>
                             <TableRow>
                                 <TableCell align='right'>{date}</TableCell>
@@ -86,20 +101,20 @@ const TableView = () => {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                        {rows.map((row) => (
-                            <TableRow
-                            key={rows[row]}
-                            sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-                            >
-                                <TableCell component="th" scope="row">
-                                    {row.title}
-                                </TableCell>
-                                <TableCell align="right">{row.calories}</TableCell>
-                                <TableCell align="right">{row.fat}</TableCell>
-                                <TableCell align="right">{row.carbs}</TableCell>
-                                <TableCell align="right">{row.protein}</TableCell>
-                            </TableRow>
-                        ))}
+                            {rows.map((row) => (
+                                <TableRow
+                                    key={rows[row]}
+                                    sx={{'&:last-child td, &:last-child th': {border: 0}}}
+                                >
+                                    <TableCell component="th" scope="row">
+                                        {row.title}
+                                    </TableCell>
+                                    <TableCell align="right">{row.calories}</TableCell>
+                                    <TableCell align="right">{row.fat}</TableCell>
+                                    <TableCell align="right">{row.carbs}</TableCell>
+                                    <TableCell align="right">{row.protein}</TableCell>
+                                </TableRow>
+                            ))}
                         </TableBody>
                     </Table>
                     <Box textAlign='center'>
@@ -107,7 +122,7 @@ const TableView = () => {
                     </Box>
                 </TableContainer>
             }
-            
+
         </div>
     );
 }
