@@ -1,7 +1,7 @@
 import { Alert, Box, Snackbar } from '@mui/material';
 import React, { useState } from 'react';
 import ReportService from '../API/ReportService';
-import Calendar from '../components/Calendar';
+import Calender from '../components/Calender';
 import MyButton from '../components/MyButton';
 import {AxiosError} from "axios";
 
@@ -38,7 +38,7 @@ const ReportDownloader = () => {
     }
     return (
         <Box textAlign='center'>
-            <Calendar date={date} setDate={setDate}>Report date</Calendar>
+            <Calender date={date} setDate={setDate}>Report date</Calender>
             <MyButton handleClick={handleClick}>Download</MyButton>
             <Snackbar open={open} autoHideDuration={3500} onClose={handleClose}>
                 <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{ width: '100%' }}>
