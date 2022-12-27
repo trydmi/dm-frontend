@@ -56,7 +56,7 @@ const Graph = () => {
     const [firstDateData, setFirstDateData] = useState();
     const [secondDateData, setSecondDateData] = useState();
 
-    useDidMountEffect(drawChart, firstDateData, secondDateData)
+    useDidMountEffect(drawChart, firstDateData)
 
     const handleClose = (reason) => {
         if (reason === 'clickaway') {
