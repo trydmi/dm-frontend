@@ -6,6 +6,7 @@ import MyButton from "../components/MyButton";
 import {Alert, Snackbar} from "@mui/material";
 import ReportService from "../API/ReportService";
 import {AxiosError} from "axios";
+import useDidMountEffect from "../hooks/useDidMountEffect";
 import {
     CategoryScale,
     Chart as ChartJS,
@@ -55,6 +56,8 @@ const Graph = () => {
     const [firstDateData, setFirstDateData] = useState();
     const [secondDateData, setSecondDateData] = useState();
 
+    useDidMountEffect(drawChart, firstDateData, secondDateData)
+
     const handleClose = (reason) => {
         if (reason === 'clickaway') {
             return;
@@ -76,7 +79,6 @@ const Graph = () => {
         } else {
             setFirstDateData(responseFirstDate)
             setSecondDateData(responseSecondDate)
-            drawChart()
         }
     }
 

@@ -12,6 +12,7 @@ import Calender from '../components/Calender';
 import {Alert, Snackbar} from '@mui/material';
 import MyButton from '../components/MyButton';
 import {AxiosError} from "axios";
+import useDidMountEffect from "../hooks/useDidMountEffect";
 
 function createData(title, calories, fat, carbs) {
     return {title, calories, fat, carbs};
@@ -26,6 +27,8 @@ const TableView = () => {
     const [success, setSuccess] = useState();
     const [data, setData] = useState();
     const [showCalendar, setShowCalendar] = useState(true)
+
+    useDidMountEffect(drawTable, data)
 
     const handleClickSuccess = () => {
         setOpen(true);
