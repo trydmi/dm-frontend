@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import ReportService from '../API/ReportService';
 import {Box} from '@mui/system';
-import Calender from '../components/Calender';
+import Calendar from '../components/Calendar';
 import {Alert, Snackbar} from '@mui/material';
 import MyButton from '../components/MyButton';
 import {AxiosError} from "axios";
@@ -84,7 +84,7 @@ const TableView = () => {
             {showCalendar
                 ?
                 <Box textAlign='center'>
-                    <Calender date={date} setDate={setDate}>Table date</Calender>
+                    <Calendar date={date} setDate={setDate}>Table date</Calendar>
                     <MyButton handleClick={handleClick}>TABLE</MyButton>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
                         <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{width: '100%'}}>
