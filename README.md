@@ -7,5 +7,3 @@ to run:
     cd dm-frontend
     npm install
     npm run
-	
-also change backend url in /API/dm-info.js
