@@ -1,7 +1,7 @@
-import { Alert, Box, Snackbar } from '@mui/material';
-import React, { useState } from 'react';
+import {Alert, Box, Snackbar} from '@mui/material';
+import React, {useState} from 'react';
 import ReportService from '../API/ReportService';
-import Calender from '../components/Calender';
+import Calendar from '../components/Calendar';
 import MyButton from '../components/MyButton';
 import {AxiosError} from "axios";
 
@@ -10,15 +10,18 @@ const ReportDownloader = () => {
     const [date, setDate] = useState(startDate)
     const [open, setOpen] = useState();
     const [success, setSuccess] = useState();
+
     const handleClickSuccess = () => {
         setOpen(true);
     }
+
     const handleClose = (reason) => {
         if (reason === 'clickaway') {
             return;
         }
         setOpen(false);
     }
+
     const handleClick = async () => {
         const response = await ReportService.getReport(date)
         if (response instanceof AxiosError) {
@@ -36,12 +39,13 @@ const ReportDownloader = () => {
             handleClickSuccess()
         }
     }
+
     return (
         <Box textAlign='center'>
-            <Calender date={date} setDate={setDate}>Report date</Calender>
+            <Calendar date={date} setDate={setDate}>Report date</Calendar>
             <MyButton handleClick={handleClick}>Download</MyButton>
             <Snackbar open={open} autoHideDuration={3500} onClose={handleClose}>
-                <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{ width: '100%' }}>
+                <Alert onClose={handleClose} severity={`${success ? 'success' : 'error'}`} sx={{width: '100%'}}>
                     {success ? 'Downloaded successfuly!' : 'No report for the date'}
                 </Alert>
             </Snackbar>
