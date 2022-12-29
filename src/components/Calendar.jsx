@@ -2,7 +2,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import { Box } from '@mui/system';
 
-const Calender = ({date, setDate, children}) => {
+const Calendar = ({date, setDate, children}) => {
     return (
         <Box textAlign='center'>
             <Stack justifyContent="center" alignItems="center" sx={{ mt: 20 }} component="form" noValidate spacing={3}>
@@ -22,4 +22,4 @@ const Calender = ({date, setDate, children}) => {
     );
 };
 
-export default Calender;
+export default Calendar;

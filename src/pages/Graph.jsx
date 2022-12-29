@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Line} from "react-chartjs-2";
 import {Box} from "@mui/system";
-import Calender from "../components/Calender";
+import Calendar from "../components/Calendar";
 import MyButton from "../components/MyButton";
 import {Alert, Snackbar} from "@mui/material";
 import ReportService from "../API/ReportService";
@@ -116,8 +116,8 @@ const Graph = () => {
                 ?
                 <Box textAlign='center'>
                     <Box display={"flex"} justifyContent={"center"}>
-                        <Calender date={firstDate} setDate={setFirstDate}>First chart date</Calender>
-                        <Calender date={secondDate} setDate={setSecondDate}>Second chart date</Calender>
+                        <Calendar date={firstDate} setDate={setFirstDate}>First chart date</Calendar>
+                        <Calendar date={secondDate} setDate={setSecondDate}>Second chart date</Calendar>
                     </Box>
                     <MyButton handleClick={handleClick}>CHART</MyButton>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
